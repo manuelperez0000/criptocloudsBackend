@@ -42,17 +42,23 @@ router.get('/criptos',async(req,res)=>{
         res.send(error)
     }
    
-   /*  .then((response)=> {
-        console.log(response.data);
-        res.json(response.data)
-      })
-      .catch(function (error) {
-        console.log(error);
-        res.error(error)
-      })
-
-    res.end(); */
 }) 
+/* 
+router.get('/criptos',(req,res)=>{
+    res.json([
+    {
+        "name":"Bitcoin",
+        "id":1,
+        "symbol":"BTC",
+        "price":37120
+    },{
+        
+        "name":"Manucoin",
+        "id":666,
+        "symbol":"m666",
+        "price":1000
+    }])
+}) */
 
 
 module.exports = router;
