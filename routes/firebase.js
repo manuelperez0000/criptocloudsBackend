@@ -8,6 +8,7 @@ admin.initializeApp({
 });
  
 const db = admin.firestore();
+const auth = admin.auth();
 
 router.get('/precio-dolar', async(req, res)=>{
     const precioDolar = db.collection('precio-dolar').doc('usd-ves');
@@ -44,6 +45,28 @@ router.get('/lista-criptos',async(req, res)=>{
 
     res.json({ criptos });
 
+});
+
+router.post('/login', (req, res)=>{
+  var e = req.body.email;
+  var p = req.body.password;
+  auth.signInWithEmailAndPassword(e, p).then(()=>{
+      console.log("Autenticado con exito");
+      res.json({ mensaje:"autenticado con exito",estado:"true", email:auth.currentUser.email })
+
+  }).catch(function(error) {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(errorMessage);
+      res.json(
+        {
+          estado:"false",
+          mensaje:"No autenticado",
+          errorMessage:errorMessage,
+          errorCode:errorCode
+      });
+  }); 
+/*   res.json({hola:"hola"}) */
 });
 
 module.exports = router;
