@@ -4,7 +4,7 @@ const renderRouter = require('./routes/index');
 const firebaseRouter = require('./routes/firebase');
 const apiRouter = require('./routes/api');
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 const app = express()
 
 app.use(express.json());

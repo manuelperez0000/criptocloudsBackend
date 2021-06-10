@@ -1,14 +1,32 @@
+const { default: axios } = require("axios");
 const express = require("express");
 const router = express.Router();
 //Firebase-Admin
-const serviceAccount = require("../criptoclouds-4f775-firebase-adminsdk-5304g-3f75328e44.json");
+/* const serviceAccount = require("../criptoclouds-4f775-firebase-adminsdk-5304g-3f75328e44.json");
 const admin = require('firebase-admin');
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
 });
  
 const db = admin.firestore();
-const auth = admin.auth();
+const auth = admin.auth(); */
+
+const firebase = require("firebase/app");
+require("firebase/firestore");
+require("firebase/auth");
+
+const firebaseConfig = {
+    apiKey: "AIzaSyCWNCK0lFUH01MuAzk-42hA3IXYhgE6QQ4",
+    authDomain: "criptoclouds-4f775.firebaseapp.com",
+    projectId: "criptoclouds-4f775",
+    storageBucket: "criptoclouds-4f775.appspot.com",
+    messagingSenderId: "861526500096",
+    appId: "1:861526500096:web:c1497d58778672907509e5"
+};
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  var auth = firebase.auth();
+  var db = firebase.firestore();
 
 router.get('/precio-dolar', async(req, res)=>{
     const precioDolar = db.collection('precio-dolar').doc('usd-ves');
@@ -47,26 +65,35 @@ router.get('/lista-criptos',async(req, res)=>{
 
 });
 
-router.post('/login', (req, res)=>{
-  var e = req.body.email;
-  var p = req.body.password;
-  auth.signInWithEmailAndPassword(e, p).then(()=>{
-      console.log("Autenticado con exito");
-      res.json({ mensaje:"autenticado con exito",estado:"true", email:auth.currentUser.email })
-
-  }).catch(function(error) {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log(errorMessage);
-      res.json(
-        {
-          estado:"false",
-          mensaje:"No autenticado",
-          errorMessage:errorMessage,
-          errorCode:errorCode
+var datos = {}
+var urlCommon = `https://identitytoolkit.googleapis.com/v1/accounts:`
+var urlReg = `${urlCommon}signUp?key=${ firebaseConfig.apiKey }`
+var urlLog = `${urlCommon}signInWithPassword?key=${ firebaseConfig.apiKey }`
+router.post('/login',  async(req, res)=>{
+    datos = {
+        "email":req.body.email,
+        "password":req.body.password
+    }
+    var rr = await axios.post(urlLog, datos)
+      .then(function (respuesta) {
+       return respuesta
+      })
+      .catch(function (error) {
+        return error
       });
-  }); 
-/*   res.json({hola:"hola"}) */
+    res.json(rr.data)
+});
+
+router.post('/register', async(req,res)=>{
+    datos = {
+        "email":req.body.email,
+        "password":req.body.password
+    }
+    var rr = await axios.post(urlReg, datos)
+      .then(respuesta=> { return respuesta })
+      .catch(error => { return error });
+
+    res.json(rr.data)
 });
 
 module.exports = router;
