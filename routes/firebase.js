@@ -65,11 +65,45 @@ router.get('/lista-criptos',async(req, res)=>{
 
 });
 
-var datos = {}
+router.post('/calificacion',(req,res)=>{
+    var calificacion = db.collection('calificacion');
+    calificacion.add({
+        estrellas:req.body.estrellas
+    })
+    console.log(req.body.estrellas)
+    res.end()
+})
+
+router.post('/contact',(req,res)=>{
+    var contact = db.collection('contacto');
+    contact.add({
+        email:req.body.email,
+        nombre:req.body.nombre,
+        comentario:req.body.textarea
+    })
+    res.end()
+    
+})
+
+router.post('/secondUserReg',(req,res)=>{
+    console.log("hola desde secondUserReg")
+    var registro = db.collection('usuarios-registrados');
+    registro.add({
+        nombre:req.body.nombre,
+        cedula:req.body.cedula,
+        telefono:req.body.telefono,
+        email:req.body.email,
+        saldoNimbus:0
+        })
+        
+    console.log("siguiente paso")
+    res.json({estado:"bien"})
+})
+/* var datos = {}
 var urlCommon = `https://identitytoolkit.googleapis.com/v1/accounts:`
 var urlReg = `${urlCommon}signUp?key=${ firebaseConfig.apiKey }`
-var urlLog = `${urlCommon}signInWithPassword?key=${ firebaseConfig.apiKey }`
-router.post('/login',  async(req, res)=>{
+var urlLog = `${urlCommon}signInWithPassword?key=${ firebaseConfig.apiKey }` */
+/* router.post('/login',  async(req, res)=>{
     datos = {
         "email":req.body.email,
         "password":req.body.password
@@ -82,9 +116,9 @@ router.post('/login',  async(req, res)=>{
         return error
       });
     res.json(rr.data)
-});
+}); */
 
-router.post('/register', async(req,res)=>{
+/* router.post('/register', async(req,res)=>{
     datos = {
         "email":req.body.email,
         "password":req.body.password
@@ -94,6 +128,6 @@ router.post('/register', async(req,res)=>{
       .catch(error => { return error });
 
     res.json(rr.data)
-});
+}); */
 
 module.exports = router;
