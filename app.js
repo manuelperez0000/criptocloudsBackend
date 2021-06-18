@@ -5,7 +5,6 @@ const firebaseRouter = require('./routes/firebase');
 const apiRouter = require('./routes/api');
 const morgan = require('morgan');
 const cors = require('cors');
-const { nextTick } = require('process');
 const port = process.env.PORT || 3000;
 const app = express()
 
