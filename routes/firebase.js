@@ -88,7 +88,7 @@ router.post('/contact',(req,res)=>{
 router.post('/secondUserReg',(req,res)=>{
     console.log("hola desde secondUserReg")
     var registro = db.collection('usuarios-registrados');
-    registro.add({
+    registro.doc(req.body.email).set({
         nombre:req.body.nombre,
         cedula:req.body.cedula,
         telefono:req.body.telefono,
@@ -98,6 +98,36 @@ router.post('/secondUserReg',(req,res)=>{
         
     console.log("siguiente paso")
     res.json({estado:"bien"})
+})
+
+router.get('/getUser/:email', async(req,res)=>{
+    var email = req.params.email
+    var nombre
+    var cedula
+    var telefono
+    var saldoNimbus
+    const user = db.collection('usuarios-registrados');
+    const snapshot = await user.where('email', '==', email).get();
+    if (snapshot.empty) {
+        console.log('No se encontro ningun usuario');
+    return;
+    }
+    snapshot.forEach(doc => {
+    console.log(doc.id, '=>', doc.data());
+    nombre = doc.data().nombre
+    cedula = doc.data().cedula
+    telefono = doc.data().telefono
+    saldoNimbus = doc.data().saldoNimbus
+
+    });
+
+    res.json({
+        email,
+        cedula,
+        nombre,
+        telefono,
+        saldoNimbus
+    })
 })
 /* var datos = {}
 var urlCommon = `https://identitytoolkit.googleapis.com/v1/accounts:`
