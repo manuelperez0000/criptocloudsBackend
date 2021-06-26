@@ -108,17 +108,18 @@ async function arregladordedatos(objCriptos){
         listaFireCriptos = doc.data().criptos
         });
     }
-
+    console.log(listaFireCriptos)
     var objAux = []
     console.log(objCriptos.length)
     for (var i = 0; i < listaFireCriptos.length; i++){
         for(var j = 0; j < objCriptos.length; j++){
             if(objCriptos[j].symbol == listaFireCriptos[i]){
-                objAux.push({   
-                    "name":objCriptos[i].name,
-                    "id":objCriptos[i].id,
-                    "symbol":objCriptos[i].symbol,
-                    "price":objCriptos[i].quote.USD.price
+                console.log(i+" - "+listaFireCriptos[i]+" - ")
+                objAux.push({
+                    "name":objCriptos[j].name,
+                    "id":objCriptos[j].id,
+                    "symbol":objCriptos[j].symbol,
+                    "price":objCriptos[j].quote.USD.price
                 })
             }
         }

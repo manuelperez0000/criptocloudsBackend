@@ -1,5 +1,5 @@
 function sendWathsapp(tipo){
-    if(tipo=0){
+    if(tipo==0){
        var email  = document.getElementById('email').value
        var banco  = document.getElementById('banco').value
        var coin   = document.getElementById('coin').value
@@ -32,7 +32,7 @@ function sendWathsapp(tipo){
 
 }
 
-/* function continuarAlCajero(){
+function continuarAlCajero(){
 
     var monto = document.getElementById('monto').value;
     var retiro = document.getElementById('retiro').value;
@@ -41,4 +41,4 @@ function sendWathsapp(tipo){
 
     direccion3 = direccion3.toString();
     window.location.href = direccion3;
-} */
+}

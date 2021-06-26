@@ -93,7 +93,8 @@ router.post('/secondUserReg',(req,res)=>{
         cedula:req.body.cedula,
         telefono:req.body.telefono,
         email:req.body.email,
-        saldoNimbus:0
+        saldoNimbus:0,
+        verificada:false
         })
         
     console.log("siguiente paso")
@@ -106,6 +107,7 @@ router.get('/getUser/:email', async(req,res)=>{
     var cedula
     var telefono
     var saldoNimbus
+    var verificada
     const user = db.collection('usuarios-registrados');
     const snapshot = await user.where('email', '==', email).get();
     if (snapshot.empty) {
@@ -118,6 +120,7 @@ router.get('/getUser/:email', async(req,res)=>{
     cedula = doc.data().cedula
     telefono = doc.data().telefono
     saldoNimbus = doc.data().saldoNimbus
+    verificada = doc.data().verificada
 
     });
 
@@ -126,9 +129,11 @@ router.get('/getUser/:email', async(req,res)=>{
         cedula,
         nombre,
         telefono,
-        saldoNimbus
+        saldoNimbus,
+        verificada
     })
 })
+
 /* var datos = {}
 var urlCommon = `https://identitytoolkit.googleapis.com/v1/accounts:`
 var urlReg = `${urlCommon}signUp?key=${ firebaseConfig.apiKey }`
