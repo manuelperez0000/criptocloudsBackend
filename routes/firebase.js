@@ -134,6 +134,8 @@ router.get('/getUser/:email', async(req,res)=>{
     })
 })
 
+
+
 /* var datos = {}
 var urlCommon = `https://identitytoolkit.googleapis.com/v1/accounts:`
 var urlReg = `${urlCommon}signUp?key=${ firebaseConfig.apiKey }`

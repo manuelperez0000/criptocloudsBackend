@@ -1,8 +1,8 @@
 const express = require('express');
 const path = require('path');
-const renderRouter = require('./routes/index');
 const firebaseRouter = require('./routes/firebase');
 const apiRouter = require('./routes/api');
+const notifications = require('./routes/notifications');
 const morgan = require('morgan');
 const cors = require('cors');
 const port = process.env.PORT || 3000;
@@ -13,11 +13,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, './public')));
 app.use(cors());
-/*app.set('view engine', 'html'); */
 
 app.use('/firebase', firebaseRouter);
 app.use('/api', apiRouter);
-//app.use('/', renderRouter);
+app.use('/notifications', notifications);
 app.use((req,res)=>{ res.sendFile( path.join(__dirname,'./public/index.html') ) });
 
 

@@ -7,9 +7,21 @@ var tiempoGuardado = "apiCache/time.txt";
 var limit  = require('../nodelimiterfs/limiterfs');
 
 const firebase = require("firebase/app");
+const  webpush  = require("web-push");
 require("firebase/firestore");
 require("firebase/auth");
 var db = firebase.firestore()
+
+const vapidkey = {
+    "publicKey":"BIlfXfJh1uTbF0cQl6yxlBEtPZ6j_9N7IoxLBA9mu5Xoz3JQ7YKBdRVdFtXsQJI1xfz0Nkwp8SfxPXvHVzDbzj8",
+    "privateKey":"xyalDDwCJxVmoW7Y6JH-w5V3Q9qEUO1jMXgP08rFlmk"
+    }
+
+webpush.setVapidDetails(
+    'mailto:admin@criptoclouds.com',
+    vapidkey.publicKey,
+    vapidkey.privateKey
+);
 
 router.get('/criptosold',async(req,res)=>{
     try {
@@ -133,6 +145,50 @@ router.get('/limit',async(req,res)=>{
     const header = { "Content-type":"application/json", 'X-CMC_PRO_API_KEY':'8c93e619-76d1-4732-b976-55eb10508ffc' }
     var eco = await limit(url,5,header)
     res.json(eco)
+})
+
+router.get('/notification',async(req,res)=>{
+
+    const notification = db.collection('notificaciones');
+    const snapshot = await notification.where('endpoint', '!=', null).get();
+    
+    if (snapshot.empty) {
+    console.log('No matching documents.');
+    return;
+    }
+
+    snapshot.forEach(doc => {
+
+    console.log(doc.data().endpoint);
+    var pushS = {
+        endpoint:doc.data().endpoint,
+        keys:{
+            auth:doc.data().auth,
+            p256dh:doc.data().p256dh
+        }
+    }
+
+    const payload = {
+        notification:{
+            title:"Transaccion nueva",
+            body:"Usted tiene una transaccion pendiente",
+            vibrate:[100,50,100],
+            image:"https://criptoclouds.com/assets/cripto-img.svg",
+            actions:[{
+                action:"explore",
+                title:"Confirmar"
+            }]
+        }
+    }
+
+    webpush.sendNotification(pushS,JSON.stringify(payload)).then(res=>{
+            console.log("enviado: "+res)
+        }).catch(err=>{
+            console.log("error:31 "+err)
+        })
+    });
+
+    res.send("Notificacion enviada con exito")
 })
 
 module.exports = router;

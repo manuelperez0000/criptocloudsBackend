@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1624735411118,
+  "timestamp": 1624912694000,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -13,11 +13,14 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main.11a50dda0dc9b8a33788.js",
+        "/main.78964c9008b99b318740.js",
         "/manifest.webmanifest",
+        "/ngsw-worker.js",
         "/polyfills.3295b36efbe3e959722e.js",
         "/runtime.323c4d6e54e472d3e5bf.js",
-        "/styles.5d3f7ef49041a0cec56b.css"
+        "/safety-worker.js",
+        "/styles.5d3f7ef49041a0cec56b.css",
+        "/worker-basic.min.js"
       ],
       "patterns": []
     },
@@ -102,7 +105,7 @@
     "/assets/img-monedas/XMR.png": "3c1dbdb8b6885a37957d210b5c9545615d9885f8",
     "/assets/img-monedas/XRP.png": "e554b9f977682e8c8e3b2414decf2eb5e58c856a",
     "/assets/img-monedas/ve.svg": "68b14335ab07204d7755a3668b2d5c5559d269ce",
-    "/assets/js/whatsappButton.js": "6f7b69cf6e2feb50930d8d6450dcb7af811bff9a",
+    "/assets/js/whatsappButton.js": "8dd2a0ad9de863bb560a2f4cbf4b91fc09c2221c",
     "/assets/logo-criptoclouds-white.svg": "b82b15a91ebdf524076b7206072a270f5bd35474",
     "/assets/menu-ico.svg": "00cee2aea3670c45dc155b2d8f8642caa0389e11",
     "/assets/nube.svg": "11c8adc38b244a10a72bf0644979f7956eaaa6da",
@@ -114,16 +117,19 @@
     "/assets/ws-icon.png": "976621a9f2b838d004364560ea373126b213b183",
     "/criptos.7bc5caca74d8c3f9f705.png": "536ab242c7497665aaa5b4c7927d51bfb9d3e4d1",
     "/favicon.ico": "107d5ed542a2d12e25389f5a1727b5a2236ea59a",
-    "/index.html": "c595d56663e6391057bfe4347bd20a5d9e095a40",
-    "/main.11a50dda0dc9b8a33788.js": "ba1c1509a13846da62a920b5c3beb2d7e751a40b",
+    "/index.html": "f29b1761f94d2677532eacb6e63085b6a5fee248",
+    "/main.78964c9008b99b318740.js": "c696dcdb511c69d8d47570876c4a9d305ad9c18e",
     "/manifest.webmanifest": "ac54c9dc995487a153c21d2b23bf704c531aeb7c",
     "/menu-ico.aaa41577d018f5cec8ea.svg": "00cee2aea3670c45dc155b2d8f8642caa0389e11",
+    "/ngsw-worker.js": "b44316be1c1338e9e8bd30ee40946085916c58e4",
     "/nube.2d87e536345c1bf6b5ee.svg": "11c8adc38b244a10a72bf0644979f7956eaaa6da",
     "/polyfills.3295b36efbe3e959722e.js": "138fde771317380c73bff2c66f0d778649928f38",
     "/remesas.782fd1026f119365fb5e.png": "e748b907120a090f32857cc85939181ad1df19c8",
     "/resguarda.3594c03015bdeab6a9dd.png": "e2a0d58d6d0bb17581fe140c918195f79346044f",
     "/runtime.323c4d6e54e472d3e5bf.js": "caa66ce06554cf8154930e2844a16837aa844e7b",
-    "/styles.5d3f7ef49041a0cec56b.css": "10632c085e89dc396ed4c82a52e95518b3105ca0"
+    "/safety-worker.js": "f532926317210be6e2679d21748dc44a35389807",
+    "/styles.5d3f7ef49041a0cec56b.css": "10632c085e89dc396ed4c82a52e95518b3105ca0",
+    "/worker-basic.min.js": "f532926317210be6e2679d21748dc44a35389807"
   },
   "navigationUrls": [
     {
